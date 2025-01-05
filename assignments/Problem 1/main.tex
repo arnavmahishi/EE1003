@@ -72,9 +72,9 @@ Solve the differential equation $y^{\prime\prime\prime}+2y^{\prime\prime}+y^{\pr
 Theoretical Solution:
 We apply the Laplace transform to each term in the equation. The Laplace transforms for the derivatives of $y\brak{t}$ are:
 \begin{align}
-\mathcal{L}\fbrak{y^{\prime}\brak{t}} &= sY\brak{s} - y\brak{0}\\
-\mathcal{L}\{y^{\prime\prime}\brak{t}\} &= s^2Y\brak{s} - s y\brak{0} - y^{\prime}\brak{0}\\
-\mathcal{L}\{y^{\prime\prime\prime}\brak{t}\} &= s^3Y\brak{s} - s^2 y\brak{0} - sy^{\prime}\brak{0} - y^{\prime\prime}\brak{0}
+\mathcal{L}\fbrak{y^{\prime}\brak{t}} &= sY\brak{s} - y\brak{0} \\
+\mathcal{L}\fbrak{y^{\prime\prime}\brak{t}} &= s^2Y\brak{s} - sy\brak{0} - y^{\prime}\brak{0} \\
+\mathcal{L}\fbrak{y^{\prime\prime\prime}\brak{t}} &= s^3Y\brak{s} - s^2 y\brak{0} - sy^{\prime}\brak{0} - y^{\prime\prime}\brak{0}
 \end{align}
 Now, applying the Laplace transform to the entire differential equation:
 \begin{align}
@@ -119,16 +119,23 @@ Where $y_{i}$ is the $i$th derivative of the function then
 \begin{align}
     \myvec{y_{0}^{\prime}\\y_{1}^{\prime}\\y_{2}^{\prime}\\ \vdots\\y^{\prime}_{n-1}}&=\myvec{y_{1}\\y_{2}\\y_{3}\\ \vdots\\ \frac{-\brak{\sum_{i=0}^{i=n-1}a_iy_i}-c}{a_n}}\\
     \implies  \myvec{1\\y_{0}^{\prime}\\y_{1}^{\prime}\\y_{2}^{\prime}\\ \vdots\\y^{\prime}_{n-1}}&=\myvec{1&0&0&\cdots&\cdots&\cdots&\cdots\\0&0&1&0&\cdots&\cdots&\cdots\\0&0&0&1&0&\cdots&\cdots\\0&0&0&0&1&0&\cdots\\ \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots\\ \frac{-c}{a_n}&\frac{-a_{0}}{a_n}&\frac{-a_{1}}{a_n}&\frac{-a_{2}}{a_n}&\cdots&\cdots&\frac{-a_{n-1}}{a_n}}\myvec{1\\y_{0}\\y_{1}\\y_{2}\\ \vdots\\y_{n-1}}\\
-    \implies \overrightarrow{V}^{\prime}\brak{t}&=A\overrightarrow{V}\brak{t}
+    \implies \vec{V}^{\prime}\brak{t}&=A\vec{V}\brak{t}
 \end{align}
-Where $\overrightarrow{V}\brak{t}$ is the vector $\myvec{1\\y_{0}\\y_{1}\\y_{2}\\ \vdots\\y_{n-1}}$ at a $t$. Using the definition of a derivative we get
+Where $\vec{V}\brak{t}$ is the vector $\myvec{1\\y_{0}\\y_{1}\\y_{2}\\ \vdots\\y_{n-1}}$ at a $t$.
+At any $N$, by defining derivative:
 \begin{align}
-	y^{\prime}\brak{t} &= \lim_{h\to 0}\frac{y\brak{t+h} - y\brak{t}}{h}\\
-	y\brak{t+h} &= y\brak{t} + hy^{\prime}\brak{t}\\
-    \implies \overrightarrow{V}\brak{t+h}&=\overrightarrow{V}\brak{t}+h\brak{A\overrightarrow{V}\brak{t}}
+	y_N^{\prime}\brak{t} &= \lim_{h\to 0}\frac{y_N\brak{t+h} - y_N\brak{t}}{h}\\
+	y_N\brak{t+h} &= y_N\brak{t} + hy_N^{\prime}\brak{t}\\
+    \implies y_0\brak{t+h} &= y_0\brak{t} + hy_0^{\prime}\brak{t}\\
+    \implies y_1\brak{t+h} &= y_1\brak{t} + hy_1^{\prime}\brak{t}\\
+    \implies y_2\brak{t+h} &= y_2\brak{t} + hy_2^{\prime}\brak{t}\\
+\vdots\quad\vdots\quad\vdots\quad\vdots&\quad\vdots\quad\vdots\quad\vdots\quad\vdots\quad\vdots\\
+    \implies y_{n-1}\brak{t+h} &= y_{n-1}\brak{t} + hy_{n-1}^{\prime}\brak{t}\\
+    \implies 
+\vec{V}\brak{t+h}&=\vec{V}\brak{t}+h\brak{A\vec{V}\brak{t}}
 \end{align}
-When $t$ ranges from $t_o$ to $t_f$ in increments of $h$, discretizing the steps gives us all $\overrightarrow{V}\brak{x}$ from $t_o$ to $t_f$ in increments of $h$
-Record the $y_0$ for each $\overrightarrow{V}\brak{x}$ we got and then plot the graph. The result will be as given below.
+When $t$ ranges from $t_o$ to $t_f$ in increments of $h$, discretizing the steps gives us all $\vec{V}\brak{x}$ from $t_o$ to $t_f$ in increments of $h$
+Record the $y_0$ for each $\vec{V}\brak{x}$ we got and then plot the graph. The result will be as given below.
 \begin{figure}[h!]
    \centering
    \includegraphics[width=1\linewidth]{figs/fig.png}
@@ -136,4 +143,3 @@ Record the $y_0$ for each $\overrightarrow{V}\brak{x}$ we got and then plot the 
    \label{stemplot}
 \end{figure}
 \end{document}
-
