@@ -110,6 +110,32 @@ Thus, the solution to the differential equation is:
    y\brak{t} = e^{-t} 
 \end{align}
 \newline
+Radius of Convergence:\\
+The power series of the required derivatives of $y$ are:
+\begin{align}
+    y^{\prime}\brak{x}=\sum_{n=1}^\infty n a_n x^{n-1}\\
+    y^{\prime\prime}\brak{x}=\sum_{n=2}^\infty n(n-1) a_n x^{n-2}\\
+    y^{\prime\prime\prime}\brak{x}=\sum_{n=3}^\infty n(n-1)(n-2) a_n x^{n-3}
+\end{align}
+Substituting into the Differential Equation:
+\begin{align}
+    \sum_{n=3}^\infty n\brak{n-1}\brak{n-2} a_n x^{n-3} 
++ 2\sum_{n=2}^\infty n\brak{n-1} a_n x^{n-2} 
++ \sum_{n=0}^\infty a_n x^n = 0.
+\end{align}
+Since the series must equal zero for all $x$, the coefficient of $x^n$ must vanish then:
+\begin{align}
+    \brak{n+3}\brak{n+2}\brak{n+1}a_{n+3}+2\brak{n+2}\brak{n+1}a_{n+2}+a_n=0\\
+    \implies a_{n+3}=-\frac{2\brak{n+2}\brak{n+1}a_{n+2}+a_n}{\brak{n+3}\brak{n+2}\brak{n+1}}
+\end{align}
+The Radius of Convergence depends on the growth of $a_n$. Using the ratio test we get
+\begin{align}
+    \lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\frac{1}{R}
+\end{align}
+The terms involve factorial like terms which generally leads to either exponential growth or decay in $a_n$. Since the differential equation has its coefficients as polynomials and not rational functions with poles it has no singularities in the finite plane which means the radius of convergence is infinite
+\begin{align}
+    R=\infty
+\end{align}
 Computational Solution:\\
 Consider the given linear differential equation
 \begin{align}
@@ -119,23 +145,22 @@ Where $y_{i}$ is the $i$th derivative of the function then
 \begin{align}
     \myvec{y_{0}^{\prime}\\y_{1}^{\prime}\\y_{2}^{\prime}\\ \vdots\\y^{\prime}_{n-1}}&=\myvec{y_{1}\\y_{2}\\y_{3}\\ \vdots\\ \frac{-\brak{\sum_{i=0}^{i=n-1}a_iy_i}-c}{a_n}}\\
     \implies  \myvec{1\\y_{0}^{\prime}\\y_{1}^{\prime}\\y_{2}^{\prime}\\ \vdots\\y^{\prime}_{n-1}}&=\myvec{1&0&0&\cdots&\cdots&\cdots&\cdots\\0&0&1&0&\cdots&\cdots&\cdots\\0&0&0&1&0&\cdots&\cdots\\0&0&0&0&1&0&\cdots\\ \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots\\ \frac{-c}{a_n}&\frac{-a_{0}}{a_n}&\frac{-a_{1}}{a_n}&\frac{-a_{2}}{a_n}&\cdots&\cdots&\frac{-a_{n-1}}{a_n}}\myvec{1\\y_{0}\\y_{1}\\y_{2}\\ \vdots\\y_{n-1}}\\
-    \implies \vec{V}^{\prime}\brak{t}&=A\vec{V}\brak{t}
+    \implies \vec{y}_k^{\prime}&=A\vec{y}_k
 \end{align}
-Where $\vec{V}\brak{t}$ is the vector $\myvec{1\\y_{0}\\y_{1}\\y_{2}\\ \vdots\\y_{n-1}}$ at a $t$.
-At any $N$, by defining derivative:
+Where $\vec{y}_k$ is the vector $\myvec{1\\y_{0,k}\\y_{1,k}\\y_{2,k}\\ \vdots\\y_{n-1,k}}$ at a $k$.
+At any $n$, by defining derivative:
 \begin{align}
-	y_N^{\prime}\brak{t} &= \lim_{h\to 0}\frac{y_N\brak{t+h} - y_N\brak{t}}{h}\\
-	y_N\brak{t+h} &= y_N\brak{t} + hy_N^{\prime}\brak{t}\\
-    \implies y_0\brak{t+h} &= y_0\brak{t} + hy_0^{\prime}\brak{t}\\
-    \implies y_1\brak{t+h} &= y_1\brak{t} + hy_1^{\prime}\brak{t}\\
-    \implies y_2\brak{t+h} &= y_2\brak{t} + hy_2^{\prime}\brak{t}\\
+	y_{n,k}^{\prime} &= \lim_{h\to 0}\frac{y_{n,k+1} - y_{n,k}}{h}\\
+	y_{n,k+1} &= y_{n,k} + hy_{n,k}^{\prime}\\
+    \implies y_{0,k+1} &= y_{0,k} + hy_{0,k}^{\prime}\\
+    \implies y_{1,k+1} &= y_{1,k} + hy_{1,k}^{\prime}\\
+    \implies y_{2,k+1} &= y_{2,k} + hy_{2,k}^{\prime}\\
 \vdots\quad\vdots\quad\vdots\quad\vdots&\quad\vdots\quad\vdots\quad\vdots\quad\vdots\quad\vdots\\
-    \implies y_{n-1}\brak{t+h} &= y_{n-1}\brak{t} + hy_{n-1}^{\prime}\brak{t}\\
+    \implies y_{n-1,k+1} &= y_{n-1,k} + hy_{n-1,k}^{\prime}\\
     \implies 
-\vec{V}\brak{t+h}&=\vec{V}\brak{t}+h\brak{A\vec{V}\brak{t}}
+\vec{y}_{k+1}&=\vec{y}_k+h\brak{A\vec{y}_k}
 \end{align}
-When $t$ ranges from $t_o$ to $t_f$ in increments of $h$, discretizing the steps gives us all $\vec{V}\brak{x}$ from $t_o$ to $t_f$ in increments of $h$
-Record the $y_0$ for each $\vec{V}\brak{x}$ we got and then plot the graph. The result will be as given below.
+When $k$ ranges from $0$ to $\frac{t_o-t_f}{h}$ in increments of $1$, discretizing the steps gives us all $\vec{y}_k$, Record the $y_{0,k}$ for each $k$ we got and then plot the graph. The result will be as given below.
 \begin{figure}[h!]
    \centering
    \includegraphics[width=1\linewidth]{figs/fig.png}
