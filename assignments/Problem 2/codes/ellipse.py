@@ -36,6 +36,7 @@ if num_solutions == 0:
     print("No intersection points.")
 else:
     x1, y1, x2, y2, area = x1.value, y1.value, x2.value, y2.value, abs(area.value)
+    print(area)
     # Plot the ellipse
     theta = np.linspace(0, 2 * np.pi, 1000)
     x_ellipse = a * np.cos(theta)

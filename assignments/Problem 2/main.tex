@@ -99,30 +99,55 @@ $\therefore$ Upon substituting $a=3,b=2$ the given area is $3\brak{\frac{\pi}{2}
 Computational Solution:\\
 Using the Trapezoidal rule which approximates the integral of a function $f\brak{x}$ over an interval $\sbrak{a,b}$ by dividing the interval into $n$ subintervals and approximating the area under the curve as a series of trapezoids
 \begin{align}
-    \int_a^b f\brak{x}dx\approx\frac{h}{2}\sbrak{f\brak{x_0}+2\sum_{i=1}^{n-1}f\brak{x_i}+f\brak{x_n}}
+    \int_a^b f\brak{x}dx\approx\frac{h}{2}\sbrak{f\brak{x_0}+2\sum_{i=1}^{n-1}\brak{f\brak{x_i}+f\brak{x_n}}}
 \end{align}
 Where $x_0$ is semi-major axis of ellipse and $x_n$ is semi-minor axis of the ellipse and $h$ is the width of each subinterval.
 \begin{align}
-    x_i=x_0+i\cdot h\\
-    h=\frac{b-a}{n}
+    x_n=x_0+n\cdot h\\
+    \implies h=\frac{x_n-x_0}{n}
 \end{align}
 In the case of our problem of the area between the line and ellipse the area is computed by:
 \begin{align}
-    A=\int_{x_{start}}^{x_{end}}\brak{f_{ellipse}\brak{x}-f_{line}\brak{x}}dx\\
+    A=\int_{x_{0}}^{x_{n}}\brak{f_{ellipse}\brak{x}-f_{line}\brak{x}}dx\\
     f_{ellipse}\brak{x}=\sqrt{4\brak{1-\frac{x^2}{9}}}\\
     f_{line}\brak{x}=2-\frac{2x}{3}
 \end{align}
-Where $\sbrak{x_{start},x_{end}}$ are the intersection points. Using the difference equation which iteratively computes the integral by adding the contributions of each subinterval. Let $A_k$ represent the area approximation after $k$ subintervals:
+Where $\sbrak{x_{0},x_{n}}$ are the intersection points.We need to find area of $y_x$ from $x_0$ to $x_n$.Taking trapezoids of small width of h discretizing points on the $x$ axis $x_0, x_1, x_2, \dots, x_n$.The sum of the trapezoidal areas will be
 \begin{align}
-    A_k&=A_{k-1}+\frac{h}{2}\sbrak{f\brak{x_k}+f\brak{x_{k-1}}}\\
-    x_k&=x_{start}+k\cdot h\\
-    \implies A_k&=A_{k-1}+\frac{h}{2}\sbrak{\brak{f_{ellipse}\brak{x_n}-f_{line}\brak{x_k}}+\brak{f_{ellipse}\brak{x_{k-1}}-f_{line}\brak{x_{k-1}}}}
+    A&=\frac{1}{2}h\brak{y\brak{x_1}+y\brak{x_0}}+ \frac{1}{2}h\brak{y\brak{x_2}+y\brak{x_1}}+\dots+\frac{1}{2}h\brak{y\brak{x_n}+y\brak{x_{n-1}}}\\
+  &=h\sbrak{\frac{1}{2}\brak{y\brak{x_0}+y\brak{x_n}}+ y\brak{x_1}+\dots+y\brak{x_{n-1}}}
 \end{align}
-Start with $A_0=0$ then iteratively calculate $f_{ellipse}\brak{x_i}$ and $f_{line}\brak{x_{i}}$ for each i from $x_{start}$ to $x_{end}$ and calculate each $A_k$ from $0$ to $n$. The value of $A_n$ will be the approximate area of the ellipse. As $n$ tends to infinity $A_n$ will be the exact area of the ellipse.
+Let $A\brak{x_n}$ be the area enclosed by the curve $y\brak{x}$ from $x=x_0$ to $x=x_n$, $\brak{x_0, x_1, \dots x_n}$ be equidistant points with step-size $h$.
+\begin{align}
+  A\brak{x_n+h}=A\brak{x_n}+\frac{1}{2}h\brak{y\brak{x_n+h}+y\brak{x_n}}
+\end{align}
+We can repeat this till we get required area.\\
+Discretizing the steps, making $A\brak{x_n}=A_n, y\brak{x_n}=y_n$ we get,
+\begin{align}
+ A_{n+1}=A_n+\frac{1}{2}h\brak{y_{n+1}+y_n}
+\end{align}
+We can write $y_{n+1}$ in terms of $y_n$ using first principle of derivative. $y_{n+1}=y_n+hy^{\prime}_n$
+\begin{align}
+  A_{n+1}&=A_n+\frac{1}{2}h\brak{\brak{y_{n}+hy^{\prime}_n}+y_n}\\
+  A_{n+1}&=A_n+\frac{1}{2}h\brak{2y_n+hy^{\prime}_n}\\
+  A_{n+1}&=A_n+hy_n+\frac{1}{2}h^2y^{\prime}_n\\
+  x_{n+1}&=x_n+h
+\end{align}
+In the given question, $y_n=\sqrt{4\brak{1-\frac{x_n^2}{9}}}+\frac{2x_n}{3}-2$ and $y^{\prime}_n=\frac{2}{3}\brak{1-\frac{x}{\sqrt{9-x^2}}}$\\
+General Difference Equation will be given by,
+\begin{align}
+  A_{n+1}&=A_n+hy_n+\frac{1}{2}h^2y^{\prime}_n\\
+  &=A_n+h\brak{\sqrt{4\brak{1-\frac{x_n^2}{9}}}+\frac{2x_n}{3}-2}+\frac{1}{2}h^2\brak{\frac{2}{3}\brak{1-\frac{x}{\sqrt{9-x^2}}}}\\
+  x_{n+1}&=x_n+h
+\end{align}
+Iterating till we reach $x_n=3$ will return required area.\\
+Area obtained computationally: $1.7123332003665432$ sq. units\\
+Area obtained theoretically: $3\brak{\frac{\pi}{2}-1}=1.71238898038$ sq. units.\\
+As $n$ tends to infinity $A_n$ will be the exact area of the ellipse.
 \begin{figure}[h!]
    \centering
    \includegraphics[width=1\linewidth]{figs/fig.png}
-   \caption{Plot of area enclosed between the line and ellipse}
+   \caption{Plot of the smaller area between ellipse and line}
    \label{stemplot}
 \end{figure}
 \end{document}
