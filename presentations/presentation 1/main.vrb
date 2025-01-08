@@ -1,0 +1,6 @@
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=1\linewidth]{figs/fig.png}
+   \caption{Comparison between the Theoretical solution and Computational solution}
+   \label{stemplot}
+\end{figure}
