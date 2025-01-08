@@ -41,7 +41,7 @@
 \bibliographystyle{IEEEtran}
 \vspace{3cm}
 
-\title{12.9.1.7}
+\title{9.1.7}
 \author{EE24BTECH11006 - Arnav Mahishi}
 % \maketitle
 % \newpage
@@ -148,7 +148,26 @@ Where $y_{i}$ is the $i$th derivative of the function then
     \implies \vec{y}_k^{\prime}&=A\vec{y}_k
 \end{align}
 Where $\vec{y}_k$ is the vector $\myvec{1\\y_{0,k}\\y_{1,k}\\y_{2,k}\\ \vdots\\y_{n-1,k}}$ at a $k$.\\
-Using the bilinear transform ,we approximate the derivative
+Using the trapezoidal rule,
+\begin{align}
+    J &= \int_a^b f\brak{x}\, dx\\
+    &\approx h\brak{\frac{1}{2}f\brak{x} + f\brak{x_1} + f\brak{x_2} \cdots + f\brak{x_{n-1}} + \frac{1}{2}f\brak{b}}\\
+    \frac{\vec{y}_{k+1} - \vec{y}_k}{1}\brak{\frac{1}{2} + \frac{1}{2}}
+    &= A\frac{x_{n+1} - x_{n}}{1}\brak{\frac{\vec{y}_k}{2} +\frac{\vec{y}_{k+1}}{2}} \\ 
+    \xrightarrow{} \vec{y}_{k+1}&=\brak{I-\frac{h}{2}A}^{-1}\cdot\brak{I+\frac{h}{2}A}\cdot\vec{y}_k
+\end{align}
+Apply Bilinear Transfrom with $T=h$ from laplace transform $Y\brak{s}=\frac{1}{s+1}$
+\begin{align}
+    s&=\frac{2}{T}\frac{1-z^{-1}}{1+z^{-1}}\\
+    \implies Y\brak{z}&=\frac{1+z^{-1}}{\brak{1+\frac{2}{h}}-\brak{1-\frac{2}{h}}z^{-1}}\\
+    \implies \alpha&=\frac{1-\frac{2}{h}}{1+\frac{2}{h}}\\
+    \implies Y\brak{z}=\frac{1+z^{-1}}{1+\alpha z^{-1}}
+\end{align}
+Applying Inverse Z transform we get the difference equation as 
+\begin{align}
+    y_n=\brak{-\alpha}^n u\sbrak{n}
+\end{align}
+Using the bilinear transform so we approximate the derivative
 \begin{align}
 	y^{\prime}\brak{t}\approx\frac{y_{k+1}-y_k}{h}\\
 \end{align}
