@@ -89,7 +89,6 @@ s^3 Y\brak{s} - s^2 + s - 1 + 2s^2 Y\brak{s} - 2s + 2 + s Y\brak{s} - 1 &= 0
 \end{align}
 
 Simplify the equation:
-
 \begin{align}
 &(s^3 + 2s^2 + s) Y\brak{s} - (s^2 - s + 1) - (2s - 2) - 1 &= 0 \\
 &(s^3 + 2s^2 + s) Y\brak{s} - s^2 - s + 1 - 2s + 2 - 1 &= 0 \\
@@ -103,36 +102,19 @@ Y\brak{s} &= \frac{s^2 + s}{s(s+1)^2}\\
 \end{align}
 Now, take the inverse Laplace transform:
 \begin{align}
-\mathcal{L}^{-1}\brak{\frac{1}{s + 1}} = e^{-t}
+\mathcal{L}^{-1}\brak{\frac{1}{s + 1}} = e^{-t}u\brak{t}
 \end{align}
 Thus, the solution to the differential equation is:
 \begin{align}
-   y\brak{t} = e^{-t} 
+   y\brak{t} = e^{-t}u\brak{t}
 \end{align}
 \newline
 Radius of Convergence:\\
-The power series of the required derivatives of $y$ are:
+The denominator indicates a pole at $s=-1$.To ensure convergence of the Laplace transform integral, the real part of $s$ must satsify:
 \begin{align}
-    y^{\prime}\brak{x}=\sum_{n=1}^\infty n a_n x^{n-1}\\
-    y^{\prime\prime}\brak{x}=\sum_{n=2}^\infty n(n-1) a_n x^{n-2}\\
-    y^{\prime\prime\prime}\brak{x}=\sum_{n=3}^\infty n(n-1)(n-2) a_n x^{n-3}
+    Re\brak{s}>-1
 \end{align}
-Substituting into the Differential Equation:
-\begin{align}
-    \sum_{n=3}^\infty n\brak{n-1}\brak{n-2} a_n x^{n-3} 
-+ 2\sum_{n=2}^\infty n\brak{n-1} a_n x^{n-2} 
-+ \sum_{n=0}^\infty a_n x^n = 0.
-\end{align}
-Since the series must equal zero for all $x$, the coefficient of $x^n$ must vanish then:
-\begin{align}
-    \brak{n+3}\brak{n+2}\brak{n+1}a_{n+3}+2\brak{n+2}\brak{n+1}a_{n+2}+a_n=0\\
-    \implies a_{n+3}=-\frac{2\brak{n+2}\brak{n+1}a_{n+2}+a_n}{\brak{n+3}\brak{n+2}\brak{n+1}}
-\end{align}
-The Radius of Convergence depends on the growth of $a_n$. Using the ratio test we get
-\begin{align}
-    \lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\frac{1}{R}
-\end{align}
-The terms involve factorial like terms which generally leads to either exponential growth or decay in $a_n$. Since the differential equation has its coefficients as polynomials and not rational functions with poles it has no singularities in the finite plane which means the radius of convergence is infinite
+Since the ROC extends infinitely to the right in the s-plane, the radius of convergence is:
 \begin{align}
     R=\infty
 \end{align}
@@ -152,26 +134,36 @@ Using the trapezoidal rule,
 \begin{align}
     J &= \int_a^b f\brak{x}\, dx\\
     &\approx h\brak{\frac{1}{2}f\brak{x} + f\brak{x_1} + f\brak{x_2} \cdots + f\brak{x_{n-1}} + \frac{1}{2}f\brak{b}}\\
-    \frac{\vec{y}_{k+1} - \vec{y}_k}{1}\brak{\frac{1}{2} + \frac{1}{2}}
-    &= A\frac{x_{n+1} - x_{n}}{1}\brak{\frac{\vec{y}_k}{2} +\frac{\vec{y}_{k+1}}{2}} \\ 
+    \frac{\vec{y}_{n+1} - \vec{y}_n}{1}\brak{\frac{1}{2} + \frac{1}{2}}
+    &= A\frac{x_{n+1} - x_{n}}{1}\brak{\frac{\vec{y}_n}{2} +\frac{\vec{y}_{n+1}}{2}} \\ 
     \xrightarrow{} \vec{y}_{k+1}&=\brak{I-\frac{h}{2}A}^{-1}\cdot\brak{I+\frac{h}{2}A}\cdot\vec{y}_k
 \end{align}
-Apply Bilinear Transfrom with $T=h$ from laplace transform $Y\brak{s}=\frac{1}{s+1}$
+Bilinear Transform:\\
+Another way we can arrive at the difference equation is by using the Bilinear transform, applying Laplace transform to both sides of the differential equation,
+\begin{align}
+    s^3 Y\brak{s} - s^2 + s - 1 + 2s^2 Y\brak{s} - 2s + 2 + s Y\brak{s} - 1 &= 0\\
+    (s^3 + 2s^2 + s) Y\brak{s} - (s^2 + s) &= 0\\
+    \brak{s^3 + 2s^2 + s} Y\brak{s} &= s^2 + s \\
+Y\brak{s} &= \frac{s^2 + s}{s(s+1)^2}\\
+\implies Y\brak{s} &= \frac{1}{s + 1}
+\end{align}
+Apply Bilinear Transform with $T=h$
 \begin{align}
     s&=\frac{2}{T}\frac{1-z^{-1}}{1+z^{-1}}\\
+    Y\brak{z}&=\frac{1}{\frac{2}{T}\cdot\frac{1-z^{-1}}{1+z^{-1}}+1}\\
+    Y\brak{z}&=\frac{1+z^{-1}}{\frac{2}{h}\brak{1-z^{-1}}+\brak{1+z^{-1}}}\\
     \implies Y\brak{z}&=\frac{1+z^{-1}}{\brak{1+\frac{2}{h}}-\brak{1-\frac{2}{h}}z^{-1}}\\
-    \implies \alpha&=\frac{1-\frac{2}{h}}{1+\frac{2}{h}}\\
-    \implies Y\brak{z}=\frac{1+z^{-1}}{1+\alpha z^{-1}}
+    \implies \text{Taking }\alpha&=\frac{1-\frac{2}{h}}{1+\frac{2}{h}}\\
+    \implies Y\brak{z}&=\frac{\brak{1-\alpha}\brak{1+z^{-1}}}{2\brak{1+\alpha z^{-1}}}\\
+    \brak{1+\alpha z^{-1}}Y\brak{z}&=\frac{1-\alpha}{2}\brak{1+z^{-1}}\\
 \end{align}
-Applying Inverse Z transform we get the difference equation as 
+Applying Inverse Z transform, we get the following difference equation
 \begin{align}
-    y_n=\brak{-\alpha}^n u\sbrak{n}
+    y_n=\alpha y_{n-1}=\frac{1-\alpha}{2}\brak{1+y_{n-1}}\\
+    \implies y_n=\frac{2}{1-\alpha}\delta\brak{n}+\frac{2}{1-3\alpha}y_{n-1},\abs{\alpha}<1
 \end{align}
-Using the bilinear transform so we approximate the derivative
-\begin{align}
-	y^{\prime}\brak{t}\approx\frac{y_{k+1}-y_k}{h}\\
-\end{align}
-Where $h$ is the step-size For the system $\vec{y}^\prime=A\vec{y}$, the bilinear transfrom gives:
+Trapzoidal form:\\
+Using trapezoidal form when $h$ is the step-size For the system $\vec{y}^\prime=A\vec{y}$, the equation gives:
 \begin{align}
     \frac{\vec{y}_{k+1}-\vec{y}_k}{h}=A\cdot\frac{\vec{y}_{k+1}+\vec{y}_{k}}{2}
 \end{align}
@@ -190,11 +182,16 @@ For $y^{\prime\prime\prime}+2y^{\prime\prime}+y^{\prime} = 0$ we get
     \implies B_1&=\myvec{1&\frac{-h}{2}&0\\0&1&\frac{-h}{2}\\0&\frac{h}{2}&1+h}\\
     \implies B_2&=\myvec{1&\frac{h}{2}&0\\0&1&\frac{h}{2}\\0&\frac{-h}{2}&1-h}\\
 \end{align}
-When $k$ ranges from $0$ to $\frac{t_o-t_f}{h}$ in increments of $1$, discretizing the steps gives us all $\vec{y}_k$, Record the $y_{0,k}$ for each $k$ we got and then plot the graph. The result will be as given below.
-\begin{figure}[h!]
+When $k$ ranges from $0$ to $\frac{t_o-t_f}{h}$ in increments of $1$, discretizing the steps gives us all $\vec{y}_k$, Record the $y_{0,k}$ for each $k$ we got and then plot the graph. The result will be as given below.As we can see from the two graphs below the graph for bilnear transform is more accurate than the one found by finite differences proving its superiority.
+\begin{figure}[H]
    \centering
    \includegraphics[width=1\linewidth]{figs/fig.png}
-   \caption{Comparison between the Theoretical solution and Computational solution}
+   \caption{Comparison between the Theoretical solution and Computational solution for Bilinear Transform}
    \label{stemplot}
+  \end{figure}
+ \begin{figure}[H]
+ \centering
+   \includegraphics[width=1\linewidth]{../Problem 1/figs/fig.png}
+   \caption{Comparison between the Theoretical solution and Computational solution for Finite Differences}
 \end{figure}
 \end{document}
