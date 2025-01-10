@@ -16,7 +16,7 @@ void create_coefficient_matrix(double** A, const double* coefficients, int order
     }
     for (int j = 0; j < order; j++) {
         A[order - 1][j] = (-1.0*coefficients[j])/coefficients[order]; // Last row for higher-order ODE coefficients
-    }
+        }
 }
 
 // Matrix multiplication

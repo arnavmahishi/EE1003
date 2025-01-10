@@ -111,28 +111,11 @@ Thus, the solution to the differential equation is:
 \end{align}
 \newline
 Radius of Convergence:\\
-The power series of the required derivatives of $y$ are:
+The denominator indicates a pole at $s=-1$.To ensure convergence of the Laplace transform integral, the real part of $s$ must satsify:
 \begin{align}
-    y^{\prime}\brak{x}=\sum_{n=1}^\infty n a_n x^{n-1}\\
-    y^{\prime\prime}\brak{x}=\sum_{n=2}^\infty n(n-1) a_n x^{n-2}\\
-    y^{\prime\prime\prime}\brak{x}=\sum_{n=3}^\infty n(n-1)(n-2) a_n x^{n-3}
+    Re\brak{s}>-1
 \end{align}
-Substituting into the Differential Equation:
-\begin{align}
-    \sum_{n=3}^\infty n\brak{n-1}\brak{n-2} a_n x^{n-3} 
-+ 2\sum_{n=2}^\infty n\brak{n-1} a_n x^{n-2} 
-+ \sum_{n=0}^\infty a_n x^n = 0.
-\end{align}
-Since the series must equal zero for all $x$, the coefficient of $x^n$ must vanish then:
-\begin{align}
-    \brak{n+3}\brak{n+2}\brak{n+1}a_{n+3}+2\brak{n+2}\brak{n+1}a_{n+2}+a_n=0\\
-    \implies a_{n+3}=-\frac{2\brak{n+2}\brak{n+1}a_{n+2}+a_n}{\brak{n+3}\brak{n+2}\brak{n+1}}
-\end{align}
-The Radius of Convergence depends on the growth of $a_n$. Using the ratio test we get
-\begin{align}
-    \lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\frac{1}{R}
-\end{align}
-The terms involve factorial like terms which generally leads to either exponential growth or decay in $a_n$. Since the differential equation has its coefficients as polynomials and not rational functions with poles it has no singularities in the finite plane which means the radius of convergence is infinite
+Since the ROC extends infinitely to the right in the s-plane, the radius of convergence is:
 \begin{align}
     R=\infty
 \end{align}
