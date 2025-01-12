@@ -35,7 +35,7 @@ max_iter = 10000
 
 # Call the C function
 converged_x = lib.gradient_ascent(c_function_prime, initial_guess, learning_rate, tolerance, max_iter)
-
+print(converged_x)
 # Plot the function and the maximum point
 x_vals = np.linspace(-6, 4, 100)
 y_vals = function(x_vals)
