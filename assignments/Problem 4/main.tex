@@ -111,12 +111,30 @@ If $\mu$ satisfies the previous condition,
     \implies -72\mu-36\mu\lim_{x\rightarrow\infty}\norm{x_n}=0\\
     \implies \lim_{x\rightarrow\infty}\norm{x_n}=-2
 \end{align}
-Choosing a step-size in the ROC $\brak{\mu=0.01}$, initial guess $x_0=0$ and toleance $1\text{e-}5$, we perform $x_{n+1}=\brak{1-36\mu}x_n-72\mu$ until $f^\prime\brak{x}$ is less than the tolerance and we get $x_n$ to be the local maxima. After convergence we get:
+Choosing a step-size in the ROC $\brak{\mu=0.01}$, initial guess $x_0=0$ and tolerance $1\text{e-}5$, we perform $x_{n+1}=\brak{1-36\mu}x_n-72\mu$ until $f^\prime\brak{x}$ is less than the tolerance and we get $x_n$ to be the local maxima. After convergence we get:
 \begin{align}
-    x_n=-2\\
-    \implies p\brak{x_n}=p\brak{-2}=41-72\brak{-2}-18\brak{-2}^2=113
+    x_{min}=-1.999997
 \end{align}
-$\therefore$ The maximum profit the company can make is $113$
+We can pose the question as the following quadratic programming question. Find the point lying on the line $y=1$, which is nearest to the origin\\
+We can formulate the problem as follows:
+\begin{align}
+    \min_{\vec{x}} \norm{e_2^{\Top}\vec{x}}^2\\
+    \text{s.t. } \\ \vec{x}^{\Top}V\vec{x} + 2\vec{u}^{\Top}\vec{x} + f = 0\\
+    V = \myvec{-18 & 0 \\ 0 & 0}\\
+    \vec{u} = \myvec{-36 \\ -0.5}\\
+    f = 0
+\end{align}
+
+In the current form, the constraint is non-convex since the constraint defines a set which is not convex, since points on the
+line joining any 2 points on the curve don't belong to the set. However, if we become lenient and make the constraint
+\begin{align}
+    \vec{x}^{\Top}V\vec{x} + 2\vec{u}^{\Top}\vec{x}+f\le 0
+\end{align}
+The constraint becomes convex so we cant use cvxpy. Using scipy.optimize to solve this convex optimization problem, we get \\
+\begin{align}
+    \text{Optimal x}: [[-2.00000002]\\
+ [113.000000006047071]]
+\end{align}
 \begin{figure}[h!]
    \centering
    \includegraphics[width=1\linewidth]{figs/fig.png}
