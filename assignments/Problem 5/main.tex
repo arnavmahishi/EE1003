@@ -87,7 +87,18 @@ If $x=18$ the other integer will be $17$ if $x=-17$ the other integer will be $-
 \end{align}
 $\therefore$ The integers can be $18,17$ or $-18,-17$\\
 \textbf{Computational Solution:}\\
-Below are two methods to find the solutions of this quadratic equation,
+Below are three methods to find the solutions of this quadratic equation,\\
+Matrix-Based Method:\\
+For a polynomial equation of form $x_n+b_{n-1}x^{n-1}+\dots+b_2x^2+b_1x+b_0 = 0$ we construct a matrix called companion matrix of form
+\begin{align}
+	\Lambda = \myvec{0&1&0&\dots&0\\ 0&0&1&\dots&0\\ \vdots &\vdots &\vdots &\ddots&\vdots\\0&0&0&\vdots&1\\-b_0&-b_1&-b_2&\dots&-b_{n-1}}
+\end{align}
+The eigenvalues of this matrix are the roots of the given polynomial equation.\\
+The solution given by the code is
+\begin{align}
+	x_1 = 18.000000\\
+	x_2 = -17.00000\
+\end{align}
 Fixed Point Iterations:
 Take an initial guess $x_0$. The update difference equation will use the following function:
 \begin{align}
@@ -116,7 +127,7 @@ $\sbrak{x_n}$ is s.\\
 \newline
 This can also be solved by the Newton-Raphson Method,\\
 Start with an initial guess $x_0$, and then run the following logical loop,
-\beginalign}
+\begin{align}
     x_{n+1} = x_n - \frac{f\brak{x_n}}{f^{\prime}\brak{x_n}} 
 \end{align}
 where ,
@@ -162,6 +173,11 @@ Iteration 3: x = -17.007687, f(x) = 0.073361
 Iteration 4: x = -17.000017, f(x) = 0.000307
 Iteration 5: x = -17.000000, f(x) = 0.000000
 Converged to solution: x = -17.000000
+
+Eigenvalues (Roots of the equation):
+Eigenvalue 1: -17.000000 +0.0000000i
+Eigenvalue 2: 18.000000 + 0.0000000i
 \end{verbatim}
 
 \end{document}
+
