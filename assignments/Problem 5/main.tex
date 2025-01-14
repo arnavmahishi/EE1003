@@ -93,13 +93,98 @@ For a polynomial equation of form $x_n+b_{n-1}x^{n-1}+\dots+b_2x^2+b_1x+b_0 = 0$
 \begin{align}
 	\Lambda = \myvec{0&1&0&\dots&0\\ 0&0&1&\dots&0\\ \vdots &\vdots &\vdots &\ddots&\vdots\\0&0&0&\vdots&1\\-b_0&-b_1&-b_2&\dots&-b_{n-1}}
 \end{align}
-The eigenvalues of this matrix are the roots of the given polynomial equation.\\
-The solution given by the code is
+The eigenvalues of this matrix are the roots of the given polynomial equation.
+To find the eigenvalues of the matrix we use QR decomposition with Wilkinson's shift.
+The QR Algorithm with Wilkinson's shift modifies the traditional QR iteration to improve the convergence rate by incorporating a shift that is carefully computed. This shift is based on the bottom right $2\times 2$ submatrix of the matrix $A$ and is given by:
 \begin{align}
-	x_1 = 18.000000\\
-	x_2 = -17.00000\
+\text{shift} = A_{\brak{n}\brak{n}} - \sgn\brak{d} \sqrt{d^2 + A_{\brak{n}\brak{n-1}} A_{\brak{n-1}\brak{n}}},
 \end{align}
-Fixed Point Iterations:
+where
+\begin{align}
+d = \frac{A_{\brak{n-1}\brak{n-1}} - A_{\brak{n}\brak{n}}}{2}.
+\end{align}
+$N$ is the size of the matrix. This strategy allows the algorithm to more rapidly converge to the eigenvalues of the matrix.
+The steps of the Algorithm are as follows:
+\begin{enumerate}
+    \item \textbf{Input:} 
+    \begin{itemize}
+        \item A square matrix $A$ of size $n \times n$.
+        \item Maximum number of iterations, $\text{Max\_iterations}$ (default: $1000$).
+        \item Convergence tolerance, $\text{Tolerance}$ (default: $10^{-10}$).
+    \end{itemize}
+
+    \item \textbf{Initialization:} 
+    \begin{itemize}
+        \item Set $A_0 = A$, the input matrix.
+        \item Initialize the iteration counter, $\text{iter} = 0$.
+    \end{itemize}
+
+    \item \textbf{Iterative Process:}
+    Repeat the following steps until the matrix converges (sub-diagonal elements are below $\text{Tolerance}$) or $\text{iter} = \text{Max\_iterations}$:
+    
+    \begin{enumerate}
+        \item \textbf{Compute Wilkinson's Shift:} For the bottom-right $2 \times 2$ submatrix:
+        \begin{align}
+        B = \begin{bmatrix}
+        a_{n-2,n-2} & a_{n-2,n-1} \\
+        a_{n-1,n-2} & a_{n-1,n-1}
+        \end{bmatrix},
+        \end{align}
+        calculate:
+       \begin{align}
+            \text{shift} = A_{\brak{n}\brak{n}} - \sgn\brak{d} \sqrt{d^2 + A_{\brak{n}\brak{n-1}} A_{\brak{n-1}\brak{n}}},
+            \end{align}
+        where
+        \begin{align}
+        d = \frac{A_{\brak{n-1}\brak{n-1}} - A_{\brak{n}\brak{n}}}{2}.
+        \end{align}
+        where $\text{sign}(d)$ is $1$ if $d \geq 0$ and $-1$ otherwise and $N$ is the size of the matrix
+        \item \textbf{Shift the Matrix:} Subtract $\mu$ from the diagonal elements of $A_k$:
+        \begin{align}
+        \hat{A}_k = A_k - \mu I.
+        \end{align}
+
+        \item \textbf{QR Decomposition:} Decompose $\hat{A}_k$ into $Q_k$ (orthogonal) and $R_k$ (upper triangular) using Gram-Schmidt:
+        \begin{align}
+        \hat{A}_k = Q_k R_k.
+        \end{align}
+
+        \item \textbf{Update the Matrix:} Compute the next matrix:
+        \begin{align}
+        A_{k+1} = R_k Q_k + \mu I.
+        \end{align}
+
+        \item \textbf{Check Convergence:} If all sub-diagonal elements $\hat{A}_k[i+1,i]$ are smaller than $\text{Tolerance}$, break the iteration loop.
+    \end{enumerate}
+
+    \item \textbf{Extract Eigenvalues:} 
+    For the resulting matrix, if any $2 \times 2$ submatrix remains on the diagonal, compute its eigenvalues using the quadratic equation:
+    \begin{align}
+    \lambda^2 + b\lambda + c = 0,
+    \end{align}
+    where $b = -(a_{n-2,n-2} + a_{n-1,n-1})$ and $c = a_{n-2,n-2} a_{n-1,n-1} - a_{n-1,n-2} a_{n-2,n-1}$. For diagonal elements, take $\lambda = a_{i,i}$.
+
+    \item \textbf{Output:} The eigenvalues of the matrix $A$.
+\end{enumerate}
+In our case:
+\begin{align}
+    \Lambda=\myvec{0&1\\306&1}
+\end{align}
+The eigen values given by the code are
+\begin{align}
+	x_1 = 18.000000000433293\\
+	x_2 = -17.000000000043303\
+\end{align}
+Theoritically we can solve it using:
+\begin{align}
+    \abs{\Lambda - \lambda I}&=0\\
+    \implies \abs{\myvec{0&1\\306&1}-\lambda\myvec{1&0\\0&1}}&=0\\
+    \implies \abs{\myvec{-\lambda&1\\306&1-\lambda}}&=0\\
+    \implies \lambda^2-\lambda-306&=0\\
+    \lambda&= 18,-17
+\end{align}
+$\therefore$ The roots of the equation are $18$ and $-17$\\
+Fixed Point Iterations:\\
 Take an initial guess $x_0$. The update difference equation will use the following function:
 \begin{align}
     x = g\brak{x}
