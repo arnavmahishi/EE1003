@@ -163,17 +163,27 @@ The steps of the Algorithm are as follows:
     \lambda^2 + b\lambda + c = 0,
     \end{align}
     where $b = -(a_{n-2,n-2} + a_{n-1,n-1})$ and $c = a_{n-2,n-2} a_{n-1,n-1} - a_{n-1,n-2} a_{n-2,n-1}$. For diagonal elements, take $\lambda = a_{i,i}$.
-
     \item \textbf{Output:} The eigenvalues of the matrix $A$.
+    \newline
 \end{enumerate}
 In our case:
 \begin{align}
-    \Lambda=\myvec{0&1\\306&1}
+    \Lambda=\myvec{0&1\\306&1}\\
+    \implies B=\myvec{a_{11}&a_{12}\\a_{21}&a_{22}}=\myvec{0&1\\306&1}\\
+    \implies d=\frac{a_{11}-a_{22}}{2}=-0.5\\
+\implies shift=a_{22}-sgn\brak{d}\sqrt{d^2+a_{12}a_{21}}=18.5\\
+    \hat{A}_0=A_0-shift\cdot I=\myvec{-18.5&1\\306&-17.5}\\
+    \implies Q_0=\myvec{-0.0603&0.9982\\0.9982&0.0603}\\R_0=\myvec{306.5586&-17.5285\\0&-0.0579}\\
+    \implies A_1=R_0Q_0+shift\cdot I=\myvec{-17.4965&-304.9422\\-0.0578&18.4965}
 \end{align}
-The eigen values given by the code are
+After 19 iterations the matrix converges to
 \begin{align}
-	x_1 = 18.000000000433293\\
-	x_2 = -17.000000000043303\
+    A_{19}=\myvec{-17&-305\\4.97\times 10^{-11}&18}
+\end{align}
+The sub-diagonal elements are nearly zero confirming convergence and the diagonal elements are the eigenvalues. The eigen values given by the code are
+\begin{align}
+	x_1 = 18.000000000433293,
+	x_2 = -17.000000000043303
 \end{align}
 Theoritically we can solve it using:
 \begin{align}
