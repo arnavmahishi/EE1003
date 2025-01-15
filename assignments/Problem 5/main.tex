@@ -90,11 +90,76 @@ $\therefore$ The integers can be $18,17$ or $-18,-17$\\
 Below are three methods to find the solutions of this quadratic equation,\\
 QR decomposition on Hessenberg matrix with Single Shift:\\
 It is a Numerical method for finding eigenvalues of a given matrix\\
+The QR algorithm is as follows:
+\begin{enumerate}
+\item QR decomposition 
+\begin{align}
+A = QR
+\end{align}
+\begin{enumerate}
+    \item $Q$ is an $ m \times n $ orthogonal matrix
+    \item $R$ is an $n \times n$ upper triangular matrix.
+\end{enumerate}
+Given a matrix $ A = [a_1, a_2, \dots, a_n] $, where each $ a_i $ is a column vector of size $ m \times 1 $.
+
+\item Normalize the first column of $A$:
+\begin{align}
+q_1 = \frac{a_1}{\norm{a_1}}
+\end{align}
+
+\item  For each subsequent column $ a_i $, subtract the projections of the previously obtained orthonormal vectors from $ a_i $ :
+\begin{align}
+a_i' = a_i - \sum_{k=1}^{i-1} \langle a_i, q_k \rangle q_k
+\end{align}
+Normalize the result to obtain the next column of \( Q \):
+\begin{align}
+q_i = \frac{a_i'}{\norm{a_i'}}
+\end{align}
+
+Repeat this process for all columns of \( A \).
+
+\item Finding $R$:- \\
+After constructing the ortho-normal columns $ q_1, q_2, \dots, q_n $ of $Q$, we can compute the elements of $R$ by taking the dot product of the original columns of $A$ with the columns of $Q$:
+
+\begin{align}
+    r_{ij} = \langle a_j, q_i \rangle \text{ , for  }  i \leq j 
+\end{align}
+\end{enumerate}
 For the given polynomial equation the companion matrix will be
 \begin{align}
 	\Lambda = \myvec{0 & 1\\306 & 1}
 \end{align}
-This algorithm involves decomposing a given matrix $A$ into two matrices, $Q$ and $R$, where $Q$ is an orthogonal matrix and $R$ is an upper triangular matrix. After performing the decomposition, the matrix is updated as $A' = RQ$. This process is repeated iteratively. In theory, as the number of iterations approaches infinity, $A'$ will converge to an upper triangular matrix with its diagonal elements representing the eigenvalues of $A$. To accelerate the convergence, a shift is introduced into the matrix during the iterations, as described below.
+This algorithm involves decomposing a given matrix $A$ into two matrices, $Q$ and $R$, where $Q$ is an orthogonal matrix and $R$ is an upper triangular matrix. After performing the decomposition, the matrix is updated as $A' = RQ$. This process is repeated iteratively. In theory, as the number of iterations approaches infinity, $A'$ will converge to an upper triangular matrix with its diagonal elements representing the eigenvalues of $A$. To accelerate the convergence, a shift is introduced into the matrix during the iterations, as described below.\\
+\begin{enumerate}
+\item Initialization \\
+Let $A_0 = A $, where $A$ is the given matrix.
+
+\item QR Decomposition \\
+For each iteration $ k = 0, 1, 2, \dots $:
+\begin{enumerate}
+    \item Compute the QR decomposition of \( A_k \), such that:
+    \begin{align}
+    A_k = Q_k R_k
+    \end{align}
+    where:
+    \begin{enumerate}
+        \item $Q_k $ is an orthogonal matrix ($ Q_k^\top Q_k = I $).
+        \item $ R_k $ is an upper triangular matrix.
+    \end{enumerate}
+    The decomposition ensures $ A_k = Q_k R_k $.
+
+    \item Form the next matrix \( A_{k+1} \) as:
+    \begin{align}
+    A_{k+1} = R_k Q_k
+    \end{align}
+\end{enumerate}
+
+\item Convergence\\
+Repeat Step 2 until $ A_k $ converges to an upper triangular matrix $ T $. The diagonal entries of $T$ are the eigenvalues of $A$.\\
+\item The eigenvalues of matrix will be the roots of the equation.
+
+\end{enumerate}
+This is the basic QR algorithm but we can intorduce a shift to make the convergence faster
 \begin{align}
 \sigma &= 1\\
 \Lambda_{\text{shifted}} &= \myvec{0 & 1\\306& 1} - \sigma I\\
@@ -350,7 +415,7 @@ the iteration process defined  above converges for any $x_0$ in $J$. The limit o
 $\sbrak{x_n}$ is s.\\
 \newline
 This can also be solved by the Newton-Raphson Method,\\
-Start with an initial guess $x_0$, and then run the following logical loop,
+Start with an initial guess $x_0$, and then run the following logical loop. The update equation is as follows
 \begin{align}
     x_{n+1} = x_n - \frac{f\brak{x_n}}{f^{\prime}\brak{x_n}} 
 \end{align}
