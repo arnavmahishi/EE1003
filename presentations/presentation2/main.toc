@@ -1,0 +1,9 @@
+\beamer@sectionintoc {2}{Problem}{3}{0}{1}
+\beamer@sectionintoc {3}{Solution}{4}{0}{2}
+\beamer@subsectionintoc {3}{1}{Input Parameters}{4}{0}{2}
+\beamer@subsectionintoc {3}{2}{Laplace Transforms}{5}{0}{2}
+\beamer@subsectionintoc {3}{3}{Simplification and Substitiution}{6}{0}{2}
+\beamer@subsectionintoc {3}{4}{Radius of Convergence}{7}{0}{2}
+\beamer@subsectionintoc {3}{5}{Computational Solution}{8}{0}{2}
+\beamer@subsectionintoc {3}{6}{Trapezoidal Rule}{9}{0}{2}
+\beamer@subsectionintoc {3}{7}{Bilinear Transform}{10}{0}{2}

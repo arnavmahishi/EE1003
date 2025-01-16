@@ -1,0 +1,2 @@
+\frametitle{Plot}
+When $k$ ranges from $0$ to $\frac{t_o-t_f}{h}$ in increments of $1$, discretizing the steps gives us all $\vec{y}_k$, Record the $y_{0,k}$ for each $k$ we got and then plot the graph. The result will be as given below.\\
