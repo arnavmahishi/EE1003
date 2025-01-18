@@ -85,49 +85,86 @@ The set of linear equations $5x-4y+8=0$ and $7x+6y-9=0$ can be represented by th
 \begin{align}
     \myvec{5&-4\\7&6}\myvec{x\\y}=\myvec{-8\\9}
 \end{align}
-Any non-sigular matrix can be represented as a product of a lower triangular matrix $L$ and an
-upper triangular matrix $U$
+Any non-singular matrix can be represented as a product of a lower triangular matrix $L$ and an
+upper triangular matrix $U$:
+\begin{align}
+    A = L \cdot U
+\end{align}
 
+The update equations for $L$ and $U$ are as follows:
+\begin{enumerate}
+    \item \textbf{For $U_{ij}$:}
+    \begin{align}
+        U_{ij} = A_{ij} - \sum_{k=1}^{i-1} L_{ik} U_{kj}, \quad i \leq j
+    \end{align}
+    \item \textbf{For $L_{ij}$:}
+    \begin{align}
+        L_{ij} = \frac{1}{U_{jj}} \left( A_{ij} - \sum_{k=1}^{j-1} L_{ik} U_{kj} \right), \quad i > j
+    \end{align}
+    \item \textbf{Diagonal of $L$:}
+    \begin{align}
+        L_{ii} = 1
+    \end{align}
+\end{enumerate}
+
+\textbf{Step-by-Step Process:}\\
+
+\textbf{1. Initial Matrix:}
 \begin{align}
-    A\vec{x} = LU\vec{x} = \vec{b}
+    A = \myvec{5 & -4 \\ 7 & 6}
 \end{align}
-The upper triangular matrix U is found by row reducing A,
+
+\textbf{2. Compute $U$ (Upper Triangular Matrix):}\\
+Using the update equation for $U$:
 \begin{align}
-    \myvec{5 & -4 \\ 7 & 6 } \xrightarrow{R_2 -> R_2 - \frac{7}{5}R_1} \myvec{5 & -4 \\ 0 & \frac{58}{5}}  
+    U_{11} = A_{11} = 5, \quad U_{12} = A_{12} = -4
 \end{align}
-Let 
+For $U_{22}$:
 \begin{align}
-    L = \myvec{1 & 0\\ l_{21} & 1}
+    U_{22} = A_{22} - L_{21} \cdot U_{12} = 6 - \frac{7}{5} \cdot (-4) = \frac{58}{5}
 \end{align}
-$l_{21}$ is the multiplier used to zero $a_{21}$, so $l_{21} = \frac{7}{5}$.\\
-\newline
-Now,
+
+\textbf{3. Compute $L$ (Lower Triangular Matrix):}\\
+Using the update equation for $L$:
 \begin{align}
-    A = \myvec{5 & -4 \\ 7 & 6 } = \myvec{1 & 0 \\ \frac{7}{5} & 1}\myvec{-8\\9}
+    L_{21} = \frac{A_{21}}{U_{11}} = \frac{7}{5}
 \end{align}
-Now we can get the solution to our problem by the two step process,
+The final $L$ matrix is:
 \begin{align}
-    L\vec{y} = \vec{b}\\
-    U\vec{x} = \vec{y}
+    L = \myvec{1 & 0 \\ \frac{7}{5} & 1}
 \end{align}
-Using forward substitution to solve the first equation,
+
+\textbf{4. Solving the System:}\\
+Using the equations $L\vec{y} = \vec{b}$ and $U\vec{x} = \vec{y}$:
+\begin{itemize}
+    \item \textbf{Forward Substitution:}
+    \begin{align}
+        \myvec{1 & 0 \\ \frac{7}{5} & 1}\myvec{y_1 \\ y_2} = \myvec{-8 \\ 9}
+    \end{align}
+    Solving gives:
+    \begin{align}
+        y_1 = -8, \quad y_2 = \frac{101}{5}
+    \end{align}
+
+    \item \textbf{Backward Substitution:}
+    \begin{align}
+        \myvec{5 & -4 \\ 0 & \frac{58}{5}}\myvec{x_1 \\ x_2} = \myvec{-8 \\ \frac{101}{5}}
+    \end{align}
+    Solving gives:
+    \begin{align}
+        x_2 = \frac{101}{58}, \quad x_1 = \frac{-6}{29}
+    \end{align}
+\end{itemize}
+
+Thus, the solution is:
 \begin{align}
-     \myvec{1 & 0 \\ \frac{7}{5} & 1}\myvec{y_1 \\ y_2} &= \myvec{-8\\9}\\
-    \implies \myvec{y_1 \\ y_2} &= \myvec{-8 \\ \frac{101}{5}}\\
+    \vec{x} = \myvec{\frac{-6}{29} \\ \frac{101}{58}}
 \end{align}
-Now using back-substitution for the second equation,
-\begin{align}
-     \myvec{5 & -4 \\ 0 & \frac{58}{5}}\myvec{x_1 \\ x_2} &= \myvec{-8 \\ \frac{101}{5}}\\
-    \implies\myvec{x_1 \\ x_2} &= \myvec{\frac{-6}{29} \\ \frac{101}{58}}
-\end{align}
-Thus,
-\bein{align}
-    \vec{x}= \myvec{\frac{-6}{29} \\ \frac{101}{58}}
-\end{align}
-$\therefore$ The lines $5x-4y+8=0$ and $7x+6y-9=0$  intersect at $\brak{\frac{6}{29},\frac{101}{58}}$
+
 \begin{figure}[h!]
    \centering
    \includegraphics[width=0.7\columnwidth]{figs/fig.png}
     \caption{Solution to set of linear equations}
 \end{figure}
 \end{document}
+
