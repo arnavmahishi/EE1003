@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.7)  20 JAN 2025 02:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.7)  20 JAN 2025 02:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1936,43 +1936,51 @@ Overfull \hbox (0.97386pt too wide) in paragraph at lines 1--67
  [][] 
  []
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
+Underfull \hbox (badness 10000) in paragraph at lines 81--83
 
  []
 
-[2]
-<figs/fig.png, id=62, 578.16pt x 433.62pt>
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
+
+ []
+
+<figs/fig.png, id=76, 578.16pt x 433.62pt>
 File: figs/fig.png Graphic file (type png)
 <use figs/fig.png>
-Package pdftex.def Info: figs/fig.png  used on input line 176.
+Package pdftex.def Info: figs/fig.png  used on input line 140.
 (pdftex.def)             Requested size: 254.9356pt x 191.19699pt.
- [3 <./figs/fig.png>] (./main.aux)
+[3 <./figs/fig.png>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 49758 strings out of 480247
- 1163667 string characters out of 5896152
- 1631516 words of memory out of 5000000
- 66862 multiletter control sequences out of 15000+600000
- 534711 words of font info for 162 fonts, out of 8000000 for 9000
+ 49767 strings out of 480247
+ 1163777 string characters out of 5896152
+ 1634448 words of memory out of 5000000
+ 66860 multiletter control sequences out of 15000+600000
+ 535823 words of font info for 163 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
- 106i,14n,107p,425b,757s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 106i,13n,107p,425b,757s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfo
-nts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (3 pages, 93797 bytes).
+nts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyc.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (3 pages, 90953 bytes).
 PDF statistics:
- 118 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 500000)
+ 134 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
+ 35 named destinations out of 1000 (max. 500000)
  114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

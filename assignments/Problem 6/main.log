@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.7)  18 JAN 2025 13:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.7)  20 JAN 2025 02:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1934,28 +1934,28 @@ File: ts1txr.fd 2000/12/15 v3.1
 ) (./tables/table.tex) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
 [2]
-<figs/fig.png, id=69, 462.528pt x 346.896pt>
+<figs/fig.png, id=62, 462.528pt x 346.896pt>
 File: figs/fig.png Graphic file (type png)
 <use figs/fig.png>
-Package pdftex.def Info: figs/fig.png  used on input line 166.
+Package pdftex.def Info: figs/fig.png  used on input line 176.
 (pdftex.def)             Requested size: 254.9356pt x 191.20625pt.
  [3 <./figs/fig.png>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 49762 strings out of 480247
- 1163727 string characters out of 5896152
- 1630449 words of memory out of 5000000
- 66863 multiletter control sequences out of 15000+600000
- 534473 words of font info for 161 fonts, out of 8000000 for 9000
+ 49757 strings out of 480247
+ 1163657 string characters out of 5896152
+ 1630448 words of memory out of 5000000
+ 66861 multiletter control sequences out of 15000+600000
+ 534711 words of font info for 162 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
- 106i,14n,107p,425b,858s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 106i,14n,107p,425b,757s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist
@@ -1964,10 +1964,10 @@ e/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive
 nts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (3 pages, 96929 bytes).
+Output written on main.pdf (3 pages, 100931 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 29 named destinations out of 1000 (max. 500000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
+ 25 named destinations out of 1000 (max. 500000)
  114 words of extra memory for PDF output out of 10000 (max. 10000000)
 
