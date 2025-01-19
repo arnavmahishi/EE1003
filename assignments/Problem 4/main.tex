@@ -41,7 +41,7 @@
 \bibliographystyle{IEEEtran}
 \vspace{3cm}
 
-\title{12.6.5.6}
+\title{10.3.2.2.1}
 \author{EE24BTECH11006 - Arnav Mahishi}
 % \maketitle
 % \newpage
@@ -59,7 +59,7 @@
 
 
 \textbf{Question}:\newline
-Find the maximum profit that a company can make, if the profit function is given by $p\brak{x}=41-72x-18x^2$
+Find out whether the lines $5x-4y+8=0$ and $7x+6y-9=0$ intersect at a point, parallel or coincident 
 \newline
 \begin{table}[h!]    
   \centering
@@ -69,76 +69,112 @@ Find the maximum profit that a company can make, if the profit function is given
 \end{table}
 \newline
 \textbf{Theoretical Solution:}\\
-To find critcal points we equate $\frac{dp\brak{x}}{dx}=0$. Let $y=p\brak{x}$
+Let $a_1$,$b_1$, and $c_1$ and $a_2$,$b_2$, and $c_2$ be the coefficents of $x$,$y$, and $1$ in lines $1$ and $2$ respectively.\\
+We get:
 \begin{align}
-    \frac{dy}{dx}=-72-36x\\
-    \implies -72-36x=0\\
-    \implies x=-2
+    \frac{a_1}{a_2}=\frac{5}{7}\\
+    \frac{b_1}{b_2}=\frac{-2}{3}\\
+    \frac{c_1}{c_2}=\frac{-8}{9}\\
+    m_1=\frac{-a_1}{b_1}=\frac{5}{4}\\
+    m_2=\frac{-a_2}{b_2}=\frac{7}{6}
 \end{align}
-To find whether $x=-2$ is a maxima or minima we need to take double derivative
-\begin{align}
-    \frac{d^2y}{dx^2}=-36
-\end{align}
-As the double derivative is negative for all $x$ so the point at $x=-2$ is a maxima\\
-\begin{align}
-    p\brak{2}=41-72\brak{-2}-18\brak{-2}^2=113
-\end{align}
-$\therefore$ The maximum profit the company can make is $113$ at $x=-2$\\
+As all the ratios aren't equal to each other neither are $m_1$ and $m_2$ equal\\
+$\therefore$ The lines intersect at a point\\
 \textbf{Computational Solution:}\\
-We use the method of gradient descent to find the local maximum of the given function. Since the coefficient of \brak{x^2 < 0}, the function is concave down, and we expect to find a local maximum. Hence we apply gradient ascent. The iterative formula \brak{\text{Difference Equation}} is as follows:
+The set of linear equations $5x-4y+8=0$ and $7x+6y-9=0$ can be represented by the following equation
 \begin{align}
-    x_{n+1}&=x_n+\mu f^{\prime}\brak{x_n}\\
-    f^\prime\brak{x_n}&=-72-36x_n\\
-    \implies x_{n+1}&=x_n+\mu\brak{-72-36x_n}\\
-    &=\brak{1-36\mu}x_n-72\mu
+    \myvec{5&-4\\7&6}\myvec{x\\y}=\myvec{-8\\9}
 \end{align}
-Applying Unilateral Z-transform,
+Any non-singular matrix can be represented as a product of a lower triangular matrix $L$ and an
+upper triangular matrix $U$:
 \begin{align}
-    zX\brak{z} - zx_0 &= \brak{1 - 36\mu}X\brak{z} - 72\mu \frac{z}{z-1} \\
-    \brak{z - \brak{1 - 36\mu}}X\brak{z} &= zx_0 - 72\mu \frac{z}{z-1} \\
-    X\brak{z} &= \frac{zx_0}{z - \brak{1 - 36\mu}} - \frac{72\mu z}{\brak{z-1}\brak{z - \brak{1 - 36\mu}}}
+    A = L \cdot U
 \end{align}
-The ROC is determined by the stability condition:
+1. Initialization: 
+   - Start by initializing $ \mathbf{L} $ as the identity matrix $ \mathbf{L} = \mathbf{I} $ and $ \mathbf{U} $ as a copy of $ \mathbf{A} $.
+   
+2. Iterative Update:
+   - For each pivot $ k = 1, 2, \ldots, n $:
+     - Compute the entries of $ U $ using the first update equation.
+     - Compute the entries of $ L $ using the second update equation.
+   
+3. Result:
+   - After completing the iterations, the matrix $ \mathbf{A} $ is decomposed into $ \mathbf{L} \cdot \mathbf{U} $, where $ \mathbf{L} $ is a lower triangular matrix with ones on the diagonal, and $ \mathbf{U} $ is an upper triangular matrix.
+\subsection*{1. Update for $ U_{k,j} $ (Entries of $ U $)}
+
+For each column $ j \geq k $, the entries of $ U $ in the $ k $-th row are updated as:
+\[
+U_{k,j} = A_{k,j} - \sum_{m=1}^{k-1} L_{k,m} \cdot U_{m,j}, \quad \text{for } j \geq k.
+\]
+This equation computes the elements of the upper triangular matrix $ \mathbf{U} $ by eliminating the lower triangular portion of the matrix.
+
+\subsection*{2. Update for $ L_{i,k} $ (Entries of $ L $)}
+
+For each row $ i > k $, the entries of $ L $ in the $ k $-th column are updated as:
+\[
+L_{i,k} = \frac{1}{U_{k,k}} \left( A_{i,k} - \sum_{m=1}^{k-1} L_{i,m} \cdot U_{m,k} \right), \quad \text{for } i > k.
+\]
+This equation computes the elements of the lower triangular matrix $ \mathbf{L} $, where each entry in the column is determined by the values in the rows above it.\\
+Using a code we get L,U as 
+
+\textbf{Step-by-Step Process:}\\
+
+\textbf{1. Initial Matrix:}
 \begin{align}
-    |1 - 36\mu| &< 1 \\
-    \implies -1 < 1 - 36\mu &< 1 \\
-    \implies 0 < \mu &< \frac{1}{18}
-\end{align}
-If $\mu$ satisfies the previous condition,
-\begin{align}
-    \lim_{n\rightarrow\infty}\norm{x_{n+1}-x_n}=0\\
-    \implies \lim_{n\rightarrow\infty}\norm{\mu\brak{-72-36x_n}}=0\\
-    \implies -72\mu-36\mu\lim_{x\rightarrow\infty}\norm{x_n}=0\\
-    \implies \lim_{x\rightarrow\infty}\norm{x_n}=-2
-\end{align}
-Choosing a step-size in the ROC $\brak{\mu=0.01}$, initial guess $x_0=0$ and tolerance $1\text{e-}5$, we perform $x_{n+1}=\brak{1-36\mu}x_n-72\mu$ until $f^\prime\brak{x}$ is less than the tolerance and we get $x_n$ to be the local maxima. After convergence we get:
-\begin{align}
-    x_{min}=-1.999997
-\end{align}
-We can pose the question as the following quadratic programming question. Find the point lying on the line $y=1$, which is nearest to the origin\\
-We can formulate the problem as follows:
-\begin{align}
-    \min_{\vec{x}} \norm{e_2^{\Top}\vec{x}}^2\\
-    \text{s.t. } \\ \vec{x}^{\Top}V\vec{x} + 2\vec{u}^{\Top}\vec{x} + f = 0\\
-    V = \myvec{-18 & 0 \\ 0 & 0}\\
-    \vec{u} = \myvec{-36 \\ -0.5}\\
-    f = 0
+    A = \myvec{5 & -4 \\ 7 & 6}
 \end{align}
 
-In the current form, the constraint is non-convex since the constraint defines a set which is not convex, since points on the
-line joining any 2 points on the curve don't belong to the set. However, if we become lenient and make the constraint
+\textbf{2. Compute $U$ (Upper Triangular Matrix):}\\
+Using the update equation for $U$:
 \begin{align}
-    \vec{x}^{\Top}V\vec{x} + 2\vec{u}^{\Top}\vec{x}+f\le 0
+    U_{11} = A_{11} = 5, \quad U_{12} = A_{12} = -4
 \end{align}
-The constraint becomes convex so we cant use cvxpy. Using scipy.optimize to solve this convex optimization problem, we get \\
+For $U_{22}$:
 \begin{align}
-    \text{Optimal x}: [[-2.00000002]\\
- [113.000000006047071]]
+    U_{22} = A_{22} - L_{21} \cdot U_{12} = 6 - \frac{7}{5} \cdot (-4) = \frac{58}{5}
 \end{align}
+
+\textbf{3. Compute $L$ (Lower Triangular Matrix):}\\
+Using the update equation for $L$:
+\begin{align}
+    L_{21} = \frac{A_{21}}{U_{11}} = \frac{7}{5}
+\end{align}
+The final $L$ matrix is:
+\begin{align}
+    L = \myvec{1 & 0 \\ \frac{7}{5} & 1}
+\end{align}
+
+\textbf{4. Solving the System:}\\
+Using the equations $L\vec{y} = \vec{b}$ and $U\vec{x} = \vec{y}$:
+\begin{itemize}
+    \item \textbf{Forward Substitution:}
+    \begin{align}
+        \myvec{1 & 0 \\ \frac{7}{5} & 1}\myvec{y_1 \\ y_2} = \myvec{-8 \\ 9}
+    \end{align}
+    Solving gives:
+    \begin{align}
+        y_1 = -8, \quad y_2 = \frac{101}{5}
+    \end{align}
+
+    \item \textbf{Backward Substitution:}
+    \begin{align}
+        \myvec{5 & -4 \\ 0 & \frac{58}{5}}\myvec{x_1 \\ x_2} = \myvec{-8 \\ \frac{101}{5}}
+    \end{align}
+    Solving gives:
+    \begin{align}
+        x_2 = \frac{101}{58}, \quad x_1 = \frac{-6}{29}
+    \end{align}
+\end{itemize}
+
+Thus, the solution is:
+\begin{align}
+    \vec{x} = \myvec{\frac{-6}{29} \\ \frac{101}{58}}
+\end{align}
+
 \begin{figure}[h!]
    \centering
-   \includegraphics[width=1\linewidth]{figs/fig.png}
-   \caption{Maximum Value of Objective Function}
-   \label{stemplot}
+   \includegraphics[width=0.7\columnwidth]{figs/fig.png}
+    \caption{Solution to set of linear equations}
 \end{figure}
 \end{document}
+
