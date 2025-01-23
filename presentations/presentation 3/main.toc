@@ -1,0 +1,6 @@
+\beamer@sectionintoc {2}{Problem}{2}{0}{1}
+\beamer@sectionintoc {3}{Solution}{3}{0}{2}
+\beamer@subsectionintoc {3}{1}{Input Parameters}{3}{0}{2}
+\beamer@subsectionintoc {3}{2}{Theoritical Soln}{4}{0}{2}
+\beamer@subsectionintoc {3}{3}{QR algo}{6}{0}{2}
+\beamer@subsectionintoc {3}{4}{Companion matrix}{8}{0}{2}
